@@ -1,0 +1,51 @@
+.films {
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    column-gap: 20px;
+    row-gap: 20px;
+  }
+
+  &__item {
+    max-width: 300px;
+    height: auto;
+  }
+
+  &__film {
+    position: relative;
+  }
+
+  &__title {
+    color: white;
+  }
+
+  &__genre {
+    color: yellow;
+  }
+
+  &__grade {
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(36, 36, 36);
+    width: 45px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+
+    &--green {
+      border: 2px solid rgb(0, 255, 0);
+    }
+
+    &--orange {
+      border: 2px solid rgb(255, 145, 0);
+    }
+
+    &--red {
+      border: 2px solid rgb(255, 0, 34);
+    }
+  }
+}

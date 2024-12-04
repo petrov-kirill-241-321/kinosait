@@ -1,0 +1,20 @@
+@import "_reset.scss", "_fonts.scss", "_media.scss", "_header.scss",
+  "_films.scss", "_modal.scss", "_footer.scss";
+
+:root {
+  --font-family: "Parkinsans-Light";
+}
+a {
+  text-decoration: none;
+  color: white;
+}
+body {
+  font-family: var(--font-family);
+  background-color: rgb(16, 16, 16);
+}
+
+.container {
+  max-width: 1240px;
+  padding-inline: 20px;
+  margin-inline: auto;
+}
