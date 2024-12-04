@@ -1,0 +1,25 @@
+.footer {
+  &__list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  &__button {
+    border: 1px solid #ccc;
+    background: #f9f9f9;
+    cursor: pointer;
+    border-radius: 50%;
+    width: 30px;
+    aspect-ratio: 1;
+    transition: background 0.3s;
+
+    &:hover:not([disabled]) {
+      background: #ddd;
+    }
+  }
+}

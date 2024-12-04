@@ -1,6 +1,6 @@
 const API_KEY = "8c8e1a50-6322-4135-8875-5d40a5420d86";
 const API_URL_POPULAR =
-  "https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS&page=1";
+  "https://kinopoiskapiunofficial.tech/api/v2.2/films/top?type=TOP_100_POPULAR_FILMS&page=";
 
 const API_URL_SEARCH =
   "https://kinopoiskapiunofficial.tech/api/v2.1/films/search-by-keyword?keyword=";
@@ -12,6 +12,7 @@ const modalEl = document.querySelector(".modal");
 
 function openModal(id) {
   modalEl.classList.add("modal--show");
+  document.body.classList.add("stop-scroling");
   modalEl.innerHTML = `
     <div class="modal__card">
       <img src="" alt="" class="modal__movie-backdrop" />
@@ -43,6 +44,7 @@ function openModal(id) {
 
 function closeModal() {
   modalEl.classList.remove("modal--show");
+  document.body.classList.remove("stop-scroling");
 }
 
 window.addEventListener("click", (event) => {
@@ -88,8 +90,6 @@ function showMovies(data) {
   });
 }
 
-getMovies(API_URL_POPULAR);
-
 async function getMovies(url) {
   const responsive = await fetch(url, {
     headers: {
@@ -100,6 +100,7 @@ async function getMovies(url) {
   const respData = await responsive.json();
   console.log(respData);
   showMovies(respData);
+  showPaginations(respData.pagesCount);
 }
 
 form.addEventListener("submit", (e) => {
@@ -110,3 +111,22 @@ form.addEventListener("submit", (e) => {
   }
   search.value = "";
 });
+
+function showPaginations(pages) {
+  const btnPaginationsMain = document.querySelector(".footer__list");
+  btnPaginationsMain.innerHTML = "";
+  for (let i = 0; i < pages; i++) {
+    const btnPaginations = document.createElement("li");
+    btnPaginations.classList.add("footer__item");
+    btnPaginationsMain.appendChild(btnPaginations);
+    btnPaginations.innerHTML = `
+      <button class="footer__button" data-page="${i + 1}">${i + 1}</button>
+    `;
+  }
+}
+document.addEventListener("click", (event) => {
+  if (event.target.dataset.page) {
+    getMovies(`${API_URL_POPULAR}${event.target.dataset.page}`);
+  }
+});
+getMovies(API_URL_POPULAR);
